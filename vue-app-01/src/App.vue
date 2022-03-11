@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task tracker"/>
-    <Task v-for="task in tasks" :key="task.id"/>
+    <TaskList :tasks="tasks"/>
   </div>
 </template>
 
@@ -9,12 +9,14 @@
 import { Options, Vue } from "vue-class-component";
 import Header from "./components/layout-header.vue";
 import Task from "./components/element-task.vue";
+import TaskList from './components/element-task-list.vue';
 
 @Options({
   name: 'app',
   components: {
     Header,
-    Task
+    Task,
+    TaskList,
   },
   data() {
     return {
