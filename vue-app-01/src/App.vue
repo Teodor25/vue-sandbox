@@ -9,9 +9,31 @@ import { Options, Vue } from "vue-class-component";
 import Header from "./components/layout-header.vue";
 
 @Options({
+  name: 'app',
   components: {
     Header
   },
+  data() {
+    return {
+      tasks: []
+    }
+  },
+  created() {
+    this.tasks = [
+      {
+        id: 1,
+        text: 'something whatever',
+        day: 'May the first of my 2022 Wow',
+        reminder: true
+      },
+      {
+        id: 2,
+        text: 'something else',
+        day: 'May the 2 of my 2022 Wow',
+        reminder: false
+      }
+    ]
+  }
 })
 export default class App extends Vue {}
 </script>
