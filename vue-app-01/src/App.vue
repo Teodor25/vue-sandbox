@@ -25,7 +25,9 @@ import TaskList from './components/element-task-list.vue';
   },
   methods: {
     deleteTask(id: string) {
-      this.tasks = this.tasks.filter((task: any) => task.id !== id );
+      if(confirm('Are you shure you want to delete this task?')) {
+        this.tasks = this.tasks.filter((task: any) => task.id !== id );
+      }
     }
   },
   created() {
