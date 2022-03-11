@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task tracker"/>
+    <AddTask @add-task="addTask" />
     <TaskList @delete-task="deleteTask" @toggle-reminder="toggleReminder" :tasks="tasks"/>
   </div>
 </template>
@@ -10,6 +11,7 @@ import { Options, Vue } from "vue-class-component";
 import Header from "./components/layout-header.vue";
 import Task from "./components/element-task.vue";
 import TaskList from './components/element-task-list.vue';
+import AddTask from './components/add-task.vue';
 
 @Options({
   name: 'app',
@@ -17,6 +19,7 @@ import TaskList from './components/element-task-list.vue';
     Header,
     Task,
     TaskList,
+    AddTask
   },
   data() {
     return {
@@ -32,6 +35,9 @@ import TaskList from './components/element-task-list.vue';
     toggleReminder(id: string) {
       // map lets you menipulate the list of objects and return it after.
       this.tasks = this.tasks.map((task: any) => task.id === id ? { ...task, reminder: !task.reminder } : task)
+    },
+    addTask(task: any) {
+      this.tasks = [...this.tasks, task]
     }
   },
   created() {
