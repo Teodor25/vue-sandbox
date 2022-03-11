@@ -1,5 +1,11 @@
 <template>
-    <button :style="{ background: color }" class="btn">{{text}}</button>
+    <button 
+        :style="{ background: color }" 
+        class="btn" 
+        @click="onClick()"
+    >
+        {{text}}
+    </button>
 </template>
 
 <script>
@@ -13,6 +19,11 @@ export default {
         color: {
             type: String,
             default: "lightblue"
+        }
+    },
+    methods: {
+        onClick() {
+            alert('Click');
         }
     }
 }
