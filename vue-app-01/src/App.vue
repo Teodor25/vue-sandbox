@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Header title="Task tracker"/>
-    <AddTask @add-task="addTask" />
+    <Header title="Task tracker" @toggle-add-task="this.toggleAddTask = !this.toggleAddTask"/>
+    <AddTask @add-task="addTask" v-if="this.toggleAddTask"/>
     <TaskList @delete-task="deleteTask" @toggle-reminder="toggleReminder" :tasks="tasks"/>
   </div>
 </template>
@@ -23,7 +23,8 @@ import AddTask from './components/add-task.vue';
   },
   data() {
     return {
-      tasks: []
+      tasks: [],
+      toggleAddTask: false
     }
   },
   methods: {
