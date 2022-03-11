@@ -1,5 +1,5 @@
 <template>
-    <div class="task" :class="classObject" >
+    <div class="task" :class="classObject" @dblclick="$emit('toggle-reminder', task.id)">
         <h3>{{task.text}}
             <i class="fas fa-times" @click="$emit('delete-task', task.id);"></i>
         </h3>
@@ -21,7 +21,7 @@ export default {
                 }
             }
     },
-    emits: ['delete-task']
+    emits: ['delete-task', 'toggle-reminder']
 }
 </script>
 
@@ -40,7 +40,7 @@ export default {
   border-left: 5px solid green;
 }
 .task.deadline {
-    border-left: 5px solid red;
+    background: rgb(255, 236, 236);
 }
 .task h3 {
   display: flex;

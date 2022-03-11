@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task tracker"/>
-    <TaskList @delete-task="deleteTask" :tasks="tasks"/>
+    <TaskList @delete-task="deleteTask" @toggle-reminder="toggleReminder" :tasks="tasks"/>
   </div>
 </template>
 
@@ -28,6 +28,10 @@ import TaskList from './components/element-task-list.vue';
       if(confirm('Are you shure you want to delete this task?')) {
         this.tasks = this.tasks.filter((task: any) => task.id !== id );
       }
+    },
+    toggleReminder(id: string) {
+      // map lets you menipulate the list of objects and return it after.
+      this.tasks = this.tasks.map((task: any) => task.id === id ? { ...task, reminder: !task.reminder } : task)
     }
   },
   created() {
