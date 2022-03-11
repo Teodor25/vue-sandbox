@@ -1,17 +1,20 @@
 <template>
   <div class="container">
     <Header title="Task tracker"/>
+    <Task v-for="task in tasks" :key="task.id"/>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Header from "./components/layout-header.vue";
+import Task from "./components/element-task.vue";
 
 @Options({
   name: 'app',
   components: {
-    Header
+    Header,
+    Task
   },
   data() {
     return {
