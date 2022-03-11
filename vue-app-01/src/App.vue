@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task tracker"/>
-    <TaskList :tasks="tasks"/>
+    <TaskList @delete-task="deleteTask" :tasks="tasks"/>
   </div>
 </template>
 
@@ -23,19 +23,33 @@ import TaskList from './components/element-task-list.vue';
       tasks: []
     }
   },
+  methods: {
+    deleteTask(id: string) {
+      this.tasks = this.tasks.filter((task: any) => task.id !== id );
+    }
+  },
   created() {
     this.tasks = [
       {
         id: 1,
         text: 'something whatever',
         day: 'May the first of my 2022 Wow',
-        reminder: true
+        reminder: true,
+        deadline: false,
       },
       {
         id: 2,
         text: 'something else',
         day: 'May the 2 of my 2022 Wow',
-        reminder: false
+        reminder: false,
+        deadline: true,
+      },
+      {
+        id: 3,
+        text: 'something else',
+        day: 'May the 2 of my 2022 Wow',
+        reminder: false,
+        deadline: false,
       }
     ]
   }

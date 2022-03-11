@@ -1,6 +1,8 @@
 <template>
-    <div class="task" :class="task.reminder ? 'reminder' : ''">
-        <h3>{{task.text}}</h3>
+    <div class="task" :class="classObject" >
+        <h3>{{task.text}}
+            <i class="fas fa-times" @click="$emit('delete-task', task.id);"></i>
+        </h3>
         <p>{{task.day}}</p>
     </div>
 </template>
@@ -10,13 +12,23 @@ export default {
     name: 'element-task',
     props: {
         task: Object
-    }
+    },
+    computed: {
+        classObject: function() {
+                return {
+                    reminder: this.task.reminder,
+                    'deadline': this.task.deadline
+                }
+            }
+    },
+    emits: ['delete-task']
 }
 </script>
 
 <style scoped>
-.fas {
-  color: red;
+.fas:hover {
+    transform: scale(1.1);
+    color: red;
 }
 .task {
   background: #f4f4f4;
@@ -26,6 +38,9 @@ export default {
 }
 .task.reminder {
   border-left: 5px solid green;
+}
+.task.deadline {
+    border-left: 5px solid red;
 }
 .task h3 {
   display: flex;
