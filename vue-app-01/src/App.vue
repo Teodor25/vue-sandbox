@@ -40,31 +40,16 @@ import AddTask from './components/add-task.vue';
     addTask(task: any) {
       this.tasks = [...this.tasks, task]
     },
+   async fetchTasks() {
+     const res = await fetch('http://localhost:5050/tasks');
+
+     const data = await res.json();
+
+     return data;
+   }
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'something whatever',
-        day: 'May the first of my 2022 Wow',
-        reminder: true,
-        deadline: false,
-      },
-      {
-        id: 2,
-        text: 'something else',
-        day: 'May the 2 of my 2022 Wow',
-        reminder: false,
-        deadline: true,
-      },
-      {
-        id: 3,
-        text: 'something else',
-        day: 'May the 2 of my 2022 Wow',
-        reminder: false,
-        deadline: false,
-      }
-    ]
+  async created() {
+    this.tasks = await this.fetchTasks();
   }
 })
 export default class App extends Vue {}
