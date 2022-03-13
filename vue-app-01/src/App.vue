@@ -29,13 +29,22 @@ import AddTask from './components/add-task.vue';
     }
   },
   methods: {
-    deleteTask(id: string) {
-      this.tasks = this.tasks.filter((task: any) => task.id !== id );
-      // if(confirm('Are you shure you want to delete this task?')) {
-      //   this.tasks = this.tasks.filter((task: any) => task.id !== id );
-      // }
+    async deleteTask(id: string) {
+      const res = await fetch(`api/tasks/${id}`, { method: 'DELETE' });
+
+      res.status === 200 ? (this.tasks = this.tasks.filter((task: any) => task.id !== id )) : alert('Failed to delete item')
     },
-    toggleReminder(id: string) {
+    async toggleReminder(id: string) {
+      const taskToToggle = await this.fetchTask(id);      
+      taskToToggle.reminder = !taskToToggle.reminder;
+      
+      const res = await fetch(`api/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(taskToToggle)
+      })
       // map lets you menipulate the list of objects and return it after.
       this.tasks = this.tasks.map((task: any) => task.id === id ? { ...task, reminder: !task.reminder } : task)
     },

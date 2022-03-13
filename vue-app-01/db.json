@@ -4,25 +4,25 @@
       "id": "1",
       "text": "Doctors Appointment",
       "day": "March 5th at 2:30pm",
-      "reminder": true
+      "reminder": false
     },
     {
       "id": "2",
       "text": "Meeting with boss",
       "day": "March 6th at 1:30pm",
-      "reminder": true
-    },
-    {
-      "id": "3",
-      "text": "Food shopping",
-      "day": "March 7th at 2:00pm",
       "reminder": false
     },
     {
-      "text": "sdfghj",
-      "day": "fghjk",
+      "text": "Scoopety",
+      "day": "",
       "reminder": false,
-      "id": "ptad2Cp"
+      "id": "UI7-WyI"
+    },
+    {
+      "text": "wow shitniiiiigs",
+      "day": "libaduaba ",
+      "reminder": true,
+      "id": "FQZV13u"
     }
   ]
 }
