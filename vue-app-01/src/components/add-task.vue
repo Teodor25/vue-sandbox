@@ -13,7 +13,10 @@
             <input type="checkbox" v-model="reminder" name="reminder" />
         </div>
 
-        <input type="submit" name="submit-button" value="Save Task" class="btn btn-block" />
+        <button type="submit" name="submit-button" value="Save Task" class="btn btn-block" :class="{'isLoading': isLoading}"> 
+          {{isLoading ? '' : 'Save Task'}}
+          <img v-if="isLoading" src="https://acegif.com/wp-content/uploads/loading-23.gif" alt="" class="spinner">
+        </button>
     </form>
 </template>
 
@@ -22,10 +25,16 @@ export default {
     name: 'add-task',
     data() {
         return {
-            text: '',
+            text: 'sdfghj',
             day: '',
             reminder: false
         }
+    },
+    props: {
+      isLoading: {
+        type: Boolean,
+        default: false
+      }
     },
     methods: {
         onSubmit(e) {
@@ -37,7 +46,6 @@ export default {
             }
 
             const newTask = {
-                id: Math.floor(Math.random() * 1000),
                 text: this.text,
                 day: this.day,
                 reminder: this.reminder,
@@ -81,5 +89,15 @@ export default {
 .form-control-check input {
   flex: 2;
   height: 20px;
+}
+
+.spinner {
+    position: relative;
+    width:50px;
+    top: -3px;
+}
+.isLoading {
+    background: rgb(218, 228, 218) !important;
+    height: 43px;
 }
 </style>
