@@ -3,6 +3,7 @@
     <Header :showAddTask="showAddTask" title="Task tracker" @toggle-add-task="this.showAddTask = !this.showAddTask;"/>
     <AddTask @add-task="addTask" v-if="this.showAddTask" :isLoading="this.isLoading"/>
     <TaskList @delete-task="deleteTask" @toggle-reminder="toggleReminder" :tasks="tasks"/>
+    <Footer />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import Header from "./components/layout-header.vue";
 import Task from "./components/element-task.vue";
 import TaskList from './components/element-task-list.vue';
 import AddTask from './components/add-task.vue';
+import Footer from './components/layout-footer.vue';
 
 @Options({
   name: 'app',
@@ -19,7 +21,8 @@ import AddTask from './components/add-task.vue';
     Header,
     Task,
     TaskList,
-    AddTask
+    AddTask,
+    Footer
   },
   data() {
     return {
@@ -45,8 +48,11 @@ import AddTask from './components/add-task.vue';
         },
         body: JSON.stringify(taskToToggle)
       })
+
+      const data = await res.json();
+
       // map lets you menipulate the list of objects and return it after.
-      this.tasks = this.tasks.map((task: any) => task.id === id ? { ...task, reminder: !task.reminder } : task)
+      this.tasks = this.tasks.map((task: any) => task.id === id ? { ...task, reminder: !data.reminder } : task)
     },
     async addTask(task: any) {
       const res = await fetch('api/tasks', {
